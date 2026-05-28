@@ -1,0 +1,6 @@
+{
+  "name": "Jan Truck Wash",
+  "description": "Bilingual lead generation website for Jan Truck Wash, professional mobile truck washing and fleet detailing serving PA, NJ, and DE.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
