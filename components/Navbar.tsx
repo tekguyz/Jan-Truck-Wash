@@ -15,46 +15,80 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 30) {
+      const scrollY = window.scrollY;
+      if (scrollY > 30) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
+      
+      // Force active section to hero when at the very top of the page (detection threshold)
+      if (scrollY < 100) {
+        setActiveSection('hero');
+      }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
-  useEffect(() => {
+    // Aggressive scroll to top on fresh load 
+    // We do it once immediately and once after a tiny frame delay to ensure browser overrides
+    if (typeof window !== 'undefined' && !window.location.hash) {
+      window.scrollTo(0, 0);
+      requestAnimationFrame(() => {
+        window.scrollTo(0, 0);
+      });
+    }
+
+    // Observer setup
     const sections = ['hero', 'services', 'how-it-works', 'why-us', 'coverage', 'contact'];
     
     const observerOptions = {
       root: null,
-      rootMargin: '-30% 0px -40% 0px',
-      threshold: 0.1,
+      rootMargin: '-20% 0px -40% 0px',
+      threshold: [0, 0.1, 0.2],
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+          // Only update if we have scrolled down a bit to avoid jitter on load
+          if (window.scrollY >= 100) {
+            setActiveSection(entry.target.id);
+          } else {
+            setActiveSection('hero');
+          }
         }
       });
     }, observerOptions);
 
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+    // Delay observing to allow layout to settle
+    const timeoutId = setTimeout(() => {
+      sections.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    }, 150);
 
     return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timeoutId);
       sections.forEach((id) => {
         const el = document.getElementById(id);
         if (el) observer.unobserve(el);
       });
     };
   }, []);
+
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.classList.add('mobile-menu-open');
+    } else {
+      document.body.classList.remove('mobile-menu-open');
+    }
+    return () => {
+      document.body.classList.remove('mobile-menu-open');
+    };
+  }, [mobileMenuOpen]);
 
   const getLinkClass = (section: string) => {
     const isActive = activeSection === section;
@@ -85,8 +119,8 @@ export default function Navbar() {
         transition={{ duration: 0.5, ease: 'easeOut' }}
         className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
           isScrolled
-            ? 'bg-bg-navy/95 border-b border-border shadow-md backdrop-blur-md py-4'
-            : 'bg-transparent border-b border-white/5 py-5'
+            ? 'bg-bg-navy/95 border-b border-border shadow-md backdrop-blur-md py-1.5 md:py-4'
+            : 'bg-transparent border-b border-white/5 py-2.5 md:py-5'
         }`}
       >
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Global Navigation">
@@ -96,21 +130,14 @@ export default function Navbar() {
             <div className="flex-shrink-0">
               <a href="#" id="nav-brand-logo" className="select-none">
                 <div className="flex items-center gap-3 flex-shrink-0">
-                  <div className="relative w-[48px] h-[48px] flex-shrink-0">
+                  <div className="relative w-10 h-10 md:w-12 md:h-12 flex-shrink-0">
                     <Image
                       src="/logo.png"
                       alt="Jan Truck Wash"
                       fill
                       priority={true}
                       className="object-contain flex-shrink-0"
-                      style={{
-                        mixBlendMode: 'lighten',
-                        borderRadius: 0,
-                        padding: 0,
-                        boxShadow: 'none',
-                        border: 'none',
-                        background: 'none',
-                      }}
+                      style={{ mixBlendMode: 'lighten' }}
                     />
                   </div>
                   <span className="text-lg font-bold leading-none whitespace-nowrap">
@@ -141,7 +168,7 @@ export default function Navbar() {
             </div>
 
             {/* Right: Controls & Call CTA */}
-            <div className="flex items-center space-x-2 md:space-x-4">
+            <div className="flex items-center space-x-3">
               
               {/* Desktop social icons */}
               <div className="hidden lg:flex items-center space-x-3 text-text-muted">
@@ -165,8 +192,8 @@ export default function Navbar() {
                 </a>
               </div>
 
-              {/* Language Selector Pills Segmented Controls */}
-              <div className="flex items-center space-x-0.5 bg-white/5 border border-white/10 rounded-full p-0.5">
+              {/* Language Selector Pills Segmented Controls (Desktop only) */}
+              <div className="hidden md:flex items-center space-x-0.5 bg-white/5 border border-white/10 rounded-full p-0.5">
                 <button
                   id="nav-lang-en"
                   onClick={() => setLocale('en')}
@@ -193,15 +220,15 @@ export default function Navbar() {
                 </button>
               </div>
 
-              {/* Responsive Active Call button (Visible on mobile & desktop) */}
+              {/* Responsive Active Call button (Visible on desktop only) */}
               <motion.a
                 id="btn-call-now"
                 href={BUSINESS.phoneLink}
                 whileTap={{ scale: 0.97 }}
-                className="flex items-center space-x-2 rounded-full bg-brand-blue px-3 py-1.5 sm:px-4 sm:py-2 font-sans text-sm font-semibold text-white hover:bg-brand-accent shadow-md shadow-brand-blue/15 hover:shadow-lg hover:shadow-brand-accent/20 transition-all cursor-pointer"
+                className="hidden md:flex items-center space-x-2 rounded-full bg-brand-blue px-4 py-2 font-sans text-sm font-semibold text-white hover:bg-brand-accent shadow-md transition-all cursor-pointer"
               >
                 <Phone className="h-4 w-4 fill-white text-white" />
-                <span className="hidden sm:inline">{t('nav.callNow')}</span>
+                <span>{t('nav.callNow')}</span>
               </motion.a>
 
               {/* Mobile Hamburger menu toggle */}
@@ -252,14 +279,7 @@ export default function Navbar() {
                       fill
                       priority={true}
                       className="object-contain"
-                      style={{
-                        mixBlendMode: 'lighten',
-                        borderRadius: 0,
-                        padding: 0,
-                        boxShadow: 'none',
-                        border: 'none',
-                        background: 'none',
-                      }}
+                      style={{ mixBlendMode: 'lighten' }}
                     />
                   </div>
                   <span className="text-base font-bold leading-none select-none">
@@ -337,16 +357,36 @@ export default function Navbar() {
                 </div>
 
                 {/* Bottom section of drawer */}
-                <div className="space-y-5 pt-6 border-t border-border/60">
-                  {/* Language Selector */}
+                <div className="space-y-6 pt-6 border-t border-border/60">
+                  {/* Inline Socials & Language Selector */}
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-text-muted">
-                      {locale === 'en' ? 'Language / Idioma' : 'Language / Idioma'}
-                    </span>
+                    {/* Social links row */}
+                    <div className="flex items-center space-x-4 text-text-muted">
+                      <a
+                        href={BUSINESS.socials.facebook}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-brand-glow transition-colors"
+                        aria-label="Facebook (Opens in new tab)"
+                      >
+                        <Facebook size={18} />
+                      </a>
+                      <a
+                        href={BUSINESS.socials.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-brand-glow transition-colors"
+                        aria-label="Instagram (Opens in new tab)"
+                      >
+                        <Instagram size={18} />
+                      </a>
+                    </div>
+
+                    {/* Desktop-style segmented language selector */}
                     <div className="flex items-center space-x-0.5 bg-white/5 border border-white/10 rounded-full p-0.5">
                       <button
                         onClick={() => setLocale('en')}
-                        className={`text-[10px] font-bold px-3 py-1 rounded-full transition-all cursor-pointer ${
+                        className={`text-[10px] font-bold px-2.5 py-1 rounded-full transition-all cursor-pointer ${
                           locale === 'en'
                             ? 'bg-brand-blue text-white font-semibold'
                             : 'text-text-muted hover:text-white'
@@ -356,7 +396,7 @@ export default function Navbar() {
                       </button>
                       <button
                         onClick={() => setLocale('es')}
-                        className={`text-[10px] font-bold px-3 py-1 rounded-full transition-all cursor-pointer ${
+                        className={`text-[10px] font-bold px-2.5 py-1 rounded-full transition-all cursor-pointer ${
                           locale === 'es'
                             ? 'bg-brand-blue text-white font-semibold'
                             : 'text-text-muted hover:text-white'
@@ -367,35 +407,13 @@ export default function Navbar() {
                     </div>
                   </div>
 
-                  {/* Social links row */}
-                  <div className="flex items-center justify-center space-x-6 text-text-muted">
-                    <a
-                      href={BUSINESS.socials.facebook}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-brand-glow transition-colors"
-                      aria-label="Facebook (Opens in new tab)"
-                    >
-                      <Facebook size={20} />
-                    </a>
-                    <a
-                      href={BUSINESS.socials.instagram}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-brand-glow transition-colors"
-                      aria-label="Instagram (Opens in new tab)"
-                    >
-                      <Instagram size={20} />
-                    </a>
-                  </div>
-
                   {/* Call CTA button */}
                   <div className="pt-2">
                     <motion.a
                       id="mobile-drawer-call-btn"
                       href={BUSINESS.phoneLink}
                       whileTap={{ scale: 0.97 }}
-                      className="flex items-center justify-center space-x-2 rounded-xl bg-brand-blue py-3 font-sans text-base font-bold text-white shadow-md shadow-brand-blue/15 hover:bg-brand-accent transition-all cursor-pointer"
+                      className="flex items-center justify-center space-x-3 rounded-full bg-gradient-to-r from-brand-blue to-blue-600 py-3.5 font-sans text-base font-bold text-white shadow-lg shadow-brand-blue/20 hover:scale-[1.02] active:scale-95 transition-all cursor-pointer border border-white/10"
                     >
                       <Phone className="h-5 w-5 fill-white text-white" />
                       <span>{BUSINESS.phone}</span>

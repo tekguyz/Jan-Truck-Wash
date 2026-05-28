@@ -146,3 +146,7 @@ html {
 }
 ::-webkit-scrollbar-thumb:hover { background: var(--cyan-glow); }
 
+body.mobile-menu-open #mobile-sticky-bar {
+  display: none !important;
+}
+

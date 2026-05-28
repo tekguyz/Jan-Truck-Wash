@@ -84,7 +84,7 @@ export default function HowItWorks() {
                 className="flex flex-row items-start pl-14 relative"
               >
                 {/* 1. Circle Badge on left */}
-                <div className="absolute left-[16px] top-0 w-10 h-10 rounded-full bg-brand-blue text-white font-bold text-sm flex items-center justify-center ring-4 ring-bg-mid z-10">
+                <div className="absolute left-[16px] top-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-brand-blue text-white font-bold text-xs md:text-sm flex items-center justify-center ring-4 ring-bg-mid z-10">
                   {idx + 1}
                 </div>
 
