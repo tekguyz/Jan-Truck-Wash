@@ -17,15 +17,15 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section id="how-it-works" className="bg-bg-mid py-16 md:py-24 px-6 text-white scroll-mt-20 relative">
-      <div className="max-w-6xl mx-auto">
+    <section id="how-it-works" className="bg-bg-mid py-[clamp(4.5rem,8vw,7rem)] px-5 sm:px-6 lg:px-8 text-white scroll-mt-20 relative select-none">
+      <div className="max-w-6xl mx-auto w-full">
         
         {/* Section Header following exact structure and spacing */}
-        <div className="text-center mb-12 md:mb-16">
-          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-brand-glow">
+        <div className="text-center mb-[clamp(3.5rem,6vw,5rem)]">
+          <p className="text-[10px] sm:text-xs font-bold tracking-[0.25em] uppercase text-brand-glow">
             {t('howItWorks.eyebrow')}
           </p>
-          <h2 className="text-3xl md:text-4xl font-black text-chrome leading-tight mt-2">
+          <h2 className="text-[clamp(2rem,5vw,2.75rem)] font-black text-chrome leading-[1.1] mt-3 tracking-tight [text-wrap:balance]">
             {t('howItWorks.heading')}
           </h2>
         </div>
@@ -70,10 +70,10 @@ export default function HowItWorks() {
         </div>
 
         {/* --- MOBILE VIEW STYLE (default stacked) --- */}
-        <div className="block md:hidden relative pl-6">
+        <div className="block md:hidden relative pl-4">
           {/* Left vertical timeline border line */}
           <div 
-            className="absolute left-[36px] top-4 bottom-8 w-px bg-border"
+            className="absolute left-[27px] top-4 bottom-8 w-px bg-border"
             aria-hidden="true"
           />
 
@@ -81,10 +81,10 @@ export default function HowItWorks() {
             {stepsData.map((step: any, idx: number) => (
               <div 
                 key={`mobile-${idx}`} 
-                className="flex flex-row items-start pl-14 relative"
+                className="flex flex-row items-start pl-12 relative"
               >
                 {/* 1. Circle Badge on left */}
-                <div className="absolute left-[16px] top-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-brand-blue text-white font-bold text-xs md:text-sm flex items-center justify-center ring-4 ring-bg-mid z-10">
+                <div className="absolute left-[16px] top-1 w-6 h-6 rounded-full bg-brand-blue text-white font-bold text-[10px] flex items-center justify-center ring-4 ring-bg-mid z-10">
                   {idx + 1}
                 </div>
 

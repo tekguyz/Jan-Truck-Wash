@@ -19,15 +19,15 @@ export default function WhyJan() {
   ];
 
   return (
-    <section id="why-us" className="bg-bg-navy py-16 md:py-24 px-6 text-white scroll-mt-20">
-      <div className="max-w-6xl mx-auto">
+    <section id="why-us" className="bg-bg-navy py-[clamp(4.5rem,8vw,7rem)] px-5 sm:px-6 lg:px-8 text-white scroll-mt-20">
+      <div className="max-w-6xl mx-auto w-full">
         
         {/* Section Header following exact structure */}
-        <div className="text-center mb-12 md:mb-16">
-          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-brand-glow">
+        <div className="text-center mb-[clamp(3.5rem,6vw,5rem)]">
+          <p className="text-[10px] sm:text-xs font-bold tracking-[0.25em] uppercase text-brand-glow">
             {t('whyJan.eyebrow')}
           </p>
-          <h2 className="text-3xl md:text-4xl font-black text-chrome leading-tight mt-2">
+          <h2 className="text-[clamp(2rem,5vw,2.75rem)] font-black text-chrome leading-[1.1] mt-3 tracking-tight [text-wrap:balance]">
             {t('whyJan.heading')}
           </h2>
         </div>

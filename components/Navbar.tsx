@@ -137,7 +137,6 @@ export default function Navbar() {
                       fill
                       priority={true}
                       className="object-contain flex-shrink-0"
-                      style={{ mixBlendMode: 'lighten' }}
                     />
                   </div>
                   <span className="text-lg font-bold leading-none whitespace-nowrap">
@@ -279,7 +278,6 @@ export default function Navbar() {
                       fill
                       priority={true}
                       className="object-contain"
-                      style={{ mixBlendMode: 'lighten' }}
                     />
                   </div>
                   <span className="text-base font-bold leading-none select-none">

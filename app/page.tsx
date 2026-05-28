@@ -9,7 +9,7 @@ import HowItWorks from '@/components/HowItWorks';
 import Stats from '@/components/Stats';
 import WhyJan from '@/components/WhyJan';
 import ServiceArea from '@/components/ServiceArea';
-import Contact from '@/components/Contact';
+import Contact from '@/components/contact/Contact';
 import Footer from '@/components/Footer';
 import MobileStickyBar from '@/components/MobileStickyBar';
 

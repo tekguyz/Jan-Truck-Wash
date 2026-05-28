@@ -30,7 +30,6 @@ export default function Footer() {
                     priority={true}
                     className="object-contain flex-shrink-0"
                     style={{
-                      mixBlendMode: 'lighten',
                       borderRadius: 0,
                       padding: 0,
                       boxShadow: 'none',

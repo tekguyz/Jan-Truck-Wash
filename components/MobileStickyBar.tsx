@@ -12,8 +12,8 @@ export default function MobileStickyBar() {
 
   React.useEffect(() => {
     const handleScroll = () => {
-      // Show after scrolling 150px
-      if (window.scrollY > 150) {
+      // Show after scrolling past the Hero
+      if (window.scrollY > 600) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
@@ -44,7 +44,9 @@ export default function MobileStickyBar() {
         duration: 0.4,
         ease: 'easeOut'
       }}
-      className="fixed bottom-0 left-0 right-0 z-50 h-16 bg-bg-navy/95 backdrop-blur-md border-t border-white/5 flex items-center justify-between px-4 pb-safe shadow-[0_-8px_30px_rgb(0_0_0/0.2)] md:hidden"
+      className={`fixed bottom-0 left-0 right-0 z-50 h-16 bg-bg-navy/95 backdrop-blur-md border-t border-white/5 flex items-center justify-between px-4 pb-safe shadow-[0_-8px_30px_rgb(0_0_0/0.2)] md:hidden ${
+        isVisible ? 'pointer-events-auto' : 'pointer-events-none'
+      }`}
       style={{
         paddingBottom: 'env(safe-area-inset-bottom)'
       }}
@@ -55,7 +57,7 @@ export default function MobileStickyBar() {
           id="sticky-bar-call"
           href={BUSINESS.phoneLink}
           whileTap={{ scale: 0.95 }}
-          className="flex-1 flex h-11 items-center justify-center space-x-2 rounded-full bg-gradient-to-r from-brand-blue to-blue-600 text-white font-bold text-sm shadow-lg shadow-brand-blue/20 transition-all"
+          className="flex-1 flex h-11 items-center justify-center space-x-2 rounded-full bg-gradient-to-r from-brand-blue to-blue-600 text-white font-bold text-sm border border-cyan-400/30 hover:border-cyan-400/60 shadow-lg shadow-black/80 transition-all"
         >
           <Phone className="h-4 w-4 fill-white text-white" />
           <span>{locale === 'en' ? 'Call Now' : 'Llamar'}</span>

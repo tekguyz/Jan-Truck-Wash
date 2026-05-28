@@ -12,7 +12,7 @@ export default function Stats() {
   return (
     <section 
       id="stats" 
-      className="relative overflow-hidden bg-bg-deep py-16 md:py-24 px-6 text-white select-none scroll-mt-20 border-t border-border"
+      className="relative overflow-hidden bg-bg-deep py-[clamp(4rem,7vw,6rem)] px-5 sm:px-6 lg:px-8 text-white select-none scroll-mt-20 border-t border-border"
     >
       {/* Background visual depth using soft radial gradient */}
       <div 
@@ -33,8 +33,8 @@ export default function Stats() {
                   key={idx} 
                   className="card-glow border-t-2 border-t-brand-accent rounded-2xl p-4 md:p-6 flex flex-col h-full items-center justify-center text-center transition-all duration-300 hover:scale-[1.03] hover:shadow-electric"
                 >
-                  {/* Large Number & Suffix line - text-3xl on mobile, text-5xl on medium up */}
-                  <div className="font-sans text-3xl md:text-5xl font-black text-chrome leading-none flex items-center justify-center select-none">
+                  {/* Large Number & Suffix line - fluid typography */}
+                  <div className="font-sans text-[clamp(2.5rem,5vw,4.5rem)] font-black text-chrome leading-none flex items-center justify-center select-none">
                     <span>{rawValue}</span>
                     {/* Suffix like + or ★ in inline accent color */}
                     {suffix && (
@@ -45,7 +45,7 @@ export default function Stats() {
                   </div>
 
                   {/* Label below */}
-                  <div className="font-sans text-[10px] md:text-xs text-text-muted uppercase tracking-widest mt-2 md:mt-3 font-semibold leading-relaxed max-w-[170px] mx-auto select-none">
+                  <div className="font-sans text-[clamp(0.6rem,1.5vw,0.75rem)] text-text-muted uppercase tracking-widest mt-3 font-semibold leading-relaxed max-w-[170px] mx-auto select-none">
                     {label}
                   </div>
                 </div>
