@@ -14,23 +14,23 @@ interface LanguageContextProps {
 const LanguageContext = createContext<LanguageContextProps | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        const savedLocale = localStorage.getItem('jan_wash_locale') as Locale;
-        if (savedLocale === 'en' || savedLocale === 'es') {
-          return savedLocale;
-        }
+  const [locale, setLocaleState] = useState<Locale>('en');
+
+  useEffect(() => {
+    try {
+      const savedLocale = localStorage.getItem('jan_wash_locale') as Locale;
+      if (savedLocale === 'en' || savedLocale === 'es') {
+        setTimeout(() => setLocaleState(savedLocale), 0);
+      } else {
         const browserLang = navigator.language.split('-')[0];
         if (browserLang === 'es') {
-          return 'es';
+          setTimeout(() => setLocaleState('es'), 0);
         }
-      } catch (e) {
-        console.warn("localStorage is not accessible in initializer", e);
       }
+    } catch (e) {
+      console.warn("Could not access localStorage or browser language", e);
     }
-    return 'en';
-  });
+  }, []);
 
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);

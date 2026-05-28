@@ -19,17 +19,20 @@ export const metadata: Metadata = {
     "Jan Truck Wash", "mobile fleet cleaning"
   ],
   icons: {
-    icon: "/logo.png",
+    icon: [
+      { url: "/logo.png", type: "image/png" },
+    ],
+    apple: "/logo.png",
   },
   openGraph: {
     title: "Jan Truck Wash | We Come To You",
     description: "Mobile truck washing & detailing. PA, NJ & DE. Call (267) 444-8115.",
-    url: "https://jantruckwash.com",
+    url: "https://jantruckwash.vercel.app",
     siteName: "Jan Truck Wash",
     type: "website",
     images: [
       {
-        url: "/logo.png",
+        url: "https://jantruckwash.vercel.app/logo.png",
         width: 512,
         height: 512,
         alt: "Jan Truck Wash Logo",
@@ -40,14 +43,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Jan Truck Wash | Mobile Truck Washing",
     description: "We come to you. PA, NJ & DE. Call (267) 444-8115.",
-    images: ["/logo.png"],
+    images: ["https://jantruckwash.vercel.app/logo.png"],
   },
   robots: {
     index: true,
     follow: true,
   },
   alternates: {
-    canonical: "https://jantruckwash.com",
+    canonical: "https://jantruckwash.vercel.app",
   },
 };
 

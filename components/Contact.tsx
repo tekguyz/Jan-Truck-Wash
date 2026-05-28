@@ -280,7 +280,7 @@ export default function Contact() {
                     type="submit"
                     whileTap={{ scale: 0.97 }}
                     disabled={formState === 'loading'}
-                    className="w-full relative flex items-center justify-center space-x-2 rounded-full bg-gradient-to-r from-brand-blue to-blue-600 text-white font-bold py-3.5 shadow-electric hover:scale-105 transition-all cursor-pointer disabled:opacity-75 disabled:hover:scale-100"
+                    className="w-full relative flex items-center justify-center space-x-2 rounded-full bg-gradient-to-r from-brand-blue to-blue-600 text-white font-bold py-3.5 border border-cyan-400/30 hover:border-cyan-400/60 shadow-lg shadow-black/80 hover:scale-105 transition-all cursor-pointer disabled:opacity-75 disabled:hover:scale-100"
                   >
                     {formState === 'loading' ? (
                       <>
@@ -370,7 +370,7 @@ export default function Contact() {
               {/* Large CTA phone link button */}
               <a
                 href={BUSINESS.phoneLink}
-                className="w-full max-w-sm mt-8 flex items-center justify-center space-x-2.5 rounded-full bg-gradient-to-r from-brand-blue to-blue-600 text-white font-bold py-4 shadow-electric hover:scale-105 transition-all"
+                className="w-full max-w-sm mt-8 flex items-center justify-center space-x-2.5 rounded-full bg-gradient-to-r from-brand-blue to-blue-600 text-white font-bold py-4 border border-cyan-400/30 hover:border-cyan-400/60 shadow-lg shadow-black/80 hover:scale-105 transition-all"
               >
                 <Phone className="h-5 w-5 fill-white" />
                 <span>{locale === 'en' ? 'Call Now' : 'Llamar Ahora'}</span>

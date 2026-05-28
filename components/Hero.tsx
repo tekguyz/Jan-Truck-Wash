@@ -122,7 +122,7 @@ export default function Hero() {
               id="hero-cta-call"
               href={BUSINESS.phoneLink}
               whileTap={{ scale: 0.97 }}
-              className="flex items-center justify-center space-x-3 w-full sm:w-auto rounded-full bg-gradient-to-r from-brand-blue to-blue-600 text-white font-bold px-8 py-4 shadow-electric hover:scale-105 transition-all cursor-pointer"
+              className="flex items-center justify-center space-x-3 w-full sm:w-auto rounded-full bg-gradient-to-r from-brand-blue to-blue-600 text-white font-bold px-8 py-4 border border-cyan-400/30 hover:border-cyan-400/60 shadow-lg shadow-black/80 hover:scale-105 transition-all cursor-pointer"
             >
               <Phone className="h-5 w-5 fill-white text-white" />
               <span>{t('hero.ctaCall')}</span>
@@ -174,58 +174,58 @@ export default function Hero() {
           <FadeInUp delay={0.4} className="w-full">
             <div className="mt-12 border-t border-border pt-8 w-full">
               {/* Small label above the strip */}
-              <div className="text-xs text-text-subtle tracking-widest uppercase font-medium text-center">
+              <div className="text-xs text-text-subtle tracking-widest uppercase font-bold text-center mb-6">
                 {t('specs.title')}
               </div>
 
               {/* Three spec cards in a row */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4 text-center">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 
                 {/* Card 1 — Pressure */}
-                <div className="card-glow rounded-2xl p-6 flex flex-col items-center hover:scale-[1.03] hover:shadow-electric hover:border-brand-glow transition-all duration-300">
-                  <div className="w-12 h-12 bg-bg-mid rounded-full flex items-center justify-center mb-3">
-                    <Gauge className="text-brand-accent animate-none" size={28} />
+                <div className="card-glow rounded-xl p-4 flex items-center space-x-4 border border-white/5 bg-bg-secondary/40 hover:border-brand-glow/40 hover:bg-white/5 transition-all duration-300 select-none">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-bg-mid border border-white/10 flex items-center justify-center text-brand-accent">
+                    <Gauge className="text-brand-accent animate-none" size={20} />
                   </div>
-                  <div className="text-2xl font-black text-white select-none">
-                    {t('specs.card1.value')}
-                  </div>
-                  <div className="text-xs font-semibold text-brand-glow uppercase tracking-wide mt-1">
-                    {t('specs.card1.label')}
-                  </div>
-                  <div className="text-xs text-text-muted leading-relaxed mt-2 max-w-xs mx-auto">
-                    {t('specs.card1.sub')}
+                  <div className="flex-1 min-w-0 text-left">
+                    <div className="flex items-baseline gap-2 flex-wrap">
+                      <span className="text-xl font-black text-chrome leading-none">{t('specs.card1.value')}</span>
+                      <span className="text-[10px] font-bold text-brand-glow uppercase tracking-wider leading-none">{t('specs.card1.label')}</span>
+                    </div>
+                    <p className="text-xs text-text-muted mt-1 leading-normal">
+                      {t('specs.card1.sub')}
+                    </p>
                   </div>
                 </div>
 
                 {/* Card 2 — Hot Water */}
-                <div className="card-glow rounded-2xl p-6 flex flex-col items-center hover:scale-[1.03] hover:shadow-electric hover:border-brand-glow transition-all duration-300">
-                  <div className="w-12 h-12 bg-bg-mid rounded-full flex items-center justify-center mb-3">
-                    <Flame className="text-brand-accent animate-none" size={28} />
+                <div className="card-glow rounded-xl p-4 flex items-center space-x-4 border border-white/5 bg-bg-secondary/40 hover:border-brand-glow/40 hover:bg-white/5 transition-all duration-300 select-none">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-bg-mid border border-white/10 flex items-center justify-center text-brand-accent">
+                    <Flame className="text-brand-accent animate-none" size={20} />
                   </div>
-                  <div className="text-2xl font-black text-white select-none">
-                    {t('specs.card2.value')}
-                  </div>
-                  <div className="text-xs font-semibold text-brand-glow uppercase tracking-wide mt-1">
-                    {t('specs.card2.label')}
-                  </div>
-                  <div className="text-xs text-text-muted leading-relaxed mt-2 max-w-xs mx-auto">
-                    {t('specs.card2.sub')}
+                  <div className="flex-1 min-w-0 text-left">
+                    <div className="flex items-baseline gap-2 flex-wrap">
+                      <span className="text-xl font-black text-chrome leading-none">{t('specs.card2.value')}</span>
+                      <span className="text-[10px] font-bold text-brand-glow uppercase tracking-wider leading-none">{t('specs.card2.label')}</span>
+                    </div>
+                    <p className="text-xs text-text-muted mt-1 leading-normal">
+                      {t('specs.card2.sub')}
+                    </p>
                   </div>
                 </div>
 
                 {/* Card 3 — EPA Compliance */}
-                <div className="card-glow rounded-2xl p-6 flex flex-col items-center hover:scale-[1.03] hover:shadow-electric hover:border-brand-glow transition-all duration-300">
-                  <div className="w-12 h-12 bg-bg-mid rounded-full flex items-center justify-center mb-3">
-                    <ShieldCheck className="text-brand-accent animate-none" size={28} />
+                <div className="card-glow rounded-xl p-4 flex items-center space-x-4 border border-white/5 bg-bg-secondary/40 hover:border-brand-glow/40 hover:bg-white/5 transition-all duration-300 select-none">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-bg-mid border border-white/10 flex items-center justify-center text-brand-accent">
+                    <ShieldCheck className="text-brand-accent animate-none" size={20} />
                   </div>
-                  <div className="text-2xl font-black text-white select-none">
-                    {t('specs.card3.value')}
-                  </div>
-                  <div className="text-xs font-semibold text-brand-glow uppercase tracking-wide mt-1">
-                    {t('specs.card3.label')}
-                  </div>
-                  <div className="text-xs text-text-muted leading-relaxed mt-2 max-w-xs mx-auto">
-                    {t('specs.card3.sub')}
+                  <div className="flex-1 min-w-0 text-left">
+                    <div className="flex items-baseline gap-2 flex-wrap">
+                      <span className="text-xl font-black text-chrome leading-none">{t('specs.card3.value')}</span>
+                      <span className="text-[10px] font-bold text-brand-glow uppercase tracking-wider leading-none">{t('specs.card3.label')}</span>
+                    </div>
+                    <p className="text-xs text-text-muted mt-1 leading-normal">
+                      {t('specs.card3.sub')}
+                    </p>
                   </div>
                 </div>
 

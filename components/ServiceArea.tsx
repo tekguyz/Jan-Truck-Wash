@@ -73,7 +73,7 @@ export default function ServiceArea() {
 
         {/* Full-width callout strip below the 3 state cards */}
         <FadeInUp delay={0.2} className="w-full">
-          <div className="mt-12 card-glow rounded-2xl p-6 md:p-8 shadow-electric relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="mt-12 card-glow rounded-2xl p-6 md:p-8 shadow-xl shadow-black/40 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
             <div 
               className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(43,127,255,0.12),transparent)] z-0" 
               aria-hidden="true" 
@@ -89,7 +89,7 @@ export default function ServiceArea() {
               <motion.a
                 href={BUSINESS.phoneLink}
                 whileTap={{ scale: 0.97 }}
-                className="flex items-center justify-center space-x-2 w-full md:w-auto rounded-full bg-gradient-to-r from-brand-blue to-blue-600 text-white font-bold px-7 py-3.5 shadow-electric hover:scale-105 transition-all cursor-pointer"
+                className="flex items-center justify-center space-x-2 w-full md:w-auto rounded-full bg-gradient-to-r from-brand-blue to-blue-600 text-white font-bold px-7 py-3.5 border border-cyan-400/30 hover:border-cyan-400/60 shadow-lg shadow-black/80 hover:scale-105 transition-all cursor-pointer"
               >
                 <Phone className="h-4 w-4 fill-white text-white" />
                 <span>{t('serviceArea.calloutCta')} →</span>
